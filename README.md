@@ -1,3 +1,7 @@
+Dev     -   https://dogwithfriends-dev.herokuapp.com/
+Prod    -   https://dogwithfriends.herokuapp.com/
+
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/sohai9/Project-2/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
