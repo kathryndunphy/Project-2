@@ -8,8 +8,9 @@ const exphbs         = require("express-handlebars");
 const path           = require("path");
 const methodOverride = require("method-override");
 const bodyParser     = require("body-parser");
-//const google/aws; Need something where we can store images
-//const cookies; Need something to save cookies
+const aws            = require('aws-sdk');
+const googleCloud = require('@google-cloud/storage');
+const cookieParser   = require("cookie-parser");
 
 // Use express
 const app  = express();
@@ -48,8 +49,14 @@ app.engine(".hbs", exphbs({
 
 app.set("view engine", ".hbs");
 
-// Set aws/google cloud
+// Set aws
+// https://www.npmjs.com/package/aws-sdk
+
+// Set google cloud
+// https://www.npmjs.com/package/@google-cloud/storage
+
 // Set cookie
+app.use(cookieParser());
 
 
 /**********************************
