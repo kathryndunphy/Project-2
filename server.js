@@ -9,7 +9,7 @@ const path           = require("path");
 const methodOverride = require("method-override");
 const bodyParser     = require("body-parser");
 const aws            = require('aws-sdk');
-const googleCloud = require('@google-cloud/storage');
+const googleCloud    = require('@google-cloud/storage');
 const cookieParser   = require("cookie-parser");
 
 // Use express
