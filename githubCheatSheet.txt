@@ -67,3 +67,4 @@ git lg
 
 1. git config --global alias.co checkout
 2. https://bitly.com/
+3. heroku logs --tail --app "dogwithfriends-dev"
