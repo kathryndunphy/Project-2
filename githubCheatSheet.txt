@@ -61,3 +61,9 @@ On terminal we have to do
 git co master
 git pull
 git lg
+
+
+
+
+1. git config --global alias.co checkout
+2. https://bitly.com/
