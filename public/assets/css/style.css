@@ -198,3 +198,120 @@ img.circle {
 h1.brand-logo img {
     height: 100%;
 }
+
+/* Animals */
+.ani-animal:hover {
+    transform : scale(1.05);
+    transition: all 0.2s;
+}
+
+/* Profile */
+#ani-user-stats {
+    font-size: 1.3em;
+}
+
+#ani-user-stats #ani-numStories,
+#ani-user-stats #ani-numAnimals,
+#ani-user-stats #ani-numDogs {
+    font-size: 1.75em;
+}
+
+/* Meet Ani */
+#ani-about-ani > .col {
+    background-color: var(--color-white-transparent);
+    border-radius   : 2px;
+}
+
+/* Meet Ani Team */
+
+
+/**********************************
+    Media query
+***********************************/
+
+/* Tablet and larger */
+@media only screen and (min-width: 601px) {
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height     : var(--height-nav);
+        line-height: var(--height-nav);
+    }
+}
+
+/* Desktop */
+@media all and (max-width: 1200px), all and (max-device-width: 1200px) {
+    #ani-device-detector {
+        font-size: 3px;
+    }
+
+    .ani-card img {
+        height: 460px;
+    }
+
+    .ani-card-preview img {
+        height: 200px;
+    }
+}
+
+/* Tablet */
+@media all and (max-width: 992px), all and (max-device-width: 992px) {
+    #ani-device-detector {
+        font-size: 2px;
+    }
+
+    .ani-desktop-page {
+        display: none;
+    }
+
+    .ani-mobile-page {
+        display: block;
+    }
+
+    h1 {
+        font-size: 2.4em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    nav .brand-logo {
+        margin-left: 0;
+    }
+
+    .ani-card img {
+        height: 300px;
+    }
+
+    .ani-card-preview img {
+        height: 240px;
+    }
+
+    .card p {
+        font-size: 1em !important;
+    }
+
+    #ani-user-stats {
+        font-size: 1.2em;
+    }
+
+    #ani-user-stats #ani-numStories,
+    #ani-user-stats #ani-numAnimals,
+    #ani-user-stats #ani-numDogs {
+        font-size: 1.4em;
+    }
+}
+
+/* Mobile */
+@media all and (max-width: 600px), all and (max-device-width: 600px) {
+    #ani-device-detector {
+        font-size: 1px;
+    }
+
+    .ani-card img {
+        height: 280px;
+    }
+
+    .ani-card-preview img {
+        height: 280px;
+    }
+}
