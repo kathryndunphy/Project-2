@@ -216,7 +216,22 @@ router.get("/profile_:id", (req, res) => {
 
 
 router.get("/upload-photos", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+    
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
 
+    } else {
+        // Must include dropzone before calling upload-photos.js
+        res.render("upload-photos", {
+            aniId,
+            aniFullname,
+            "customCSS"       : ["dropzone/dropzone", "style"],
+            "customJavascript": ["dropzone/dropzone", "upload-photos"]
+        });
+
+    }
 });
 
 router.get("/create-story", (req, res) => {
