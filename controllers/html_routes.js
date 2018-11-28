@@ -17,7 +17,7 @@ const Photo  = models.Photo;
 const Dog    = models.Dog;
 
 // Ani team
-const AniTeam = [
+const aniTeam = [
     {
         "fullname"    : "sohai9",
         "url_photo"   : "assets/images/0.jpg",
