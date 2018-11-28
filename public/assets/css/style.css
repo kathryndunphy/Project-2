@@ -223,6 +223,14 @@ h1.brand-logo img {
 }
 
 /* Meet Ani Team */
+.carousel {
+    height: 67vh;
+}
+
+.carousel-item {
+    width:  30% !important;
+    top  : -30% !important;
+}
 
 
 /**********************************
