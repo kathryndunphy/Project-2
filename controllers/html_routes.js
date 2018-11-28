@@ -45,10 +45,11 @@ const AniTeam = [
 ];
 
 // Source: https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-guid
-function isValidCookie(uuid) {
+function isValidCookie(UUID) {
     const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-
-    return (uuid && regex.test(uuid));
+    console.log(UUID)
+    console.log(regex.test(UUID))
+    return (UUID && regex.test(UUID));
 }
 
 // Pass these values if the user is not logged in
@@ -71,10 +72,12 @@ router.get("/", (req, res) => {
 
     // Display homepage if the user is not logged in or does not have a valid cookie
     if (!isValidCookie(aniId)) {
+        console.log('bad login')
         res.render("index", defaultValues);
 
     // Display the profile page if the user is logged in
     } else {
+        
         function callback(results) {
             const stories = [];
 
@@ -86,7 +89,7 @@ router.get("/", (req, res) => {
                 });
             }
 
-            // TODO: Calculate the number of stories, Animals, and Dogs based on queries
+            // TODO: Calculate the number of stories, Animals, and Dogs based on queries********
             const animal = {
                 "fullname"     : results[0].dataValues.fullname,
                 "url_photo"    : results[0].dataValues.url_photo,
@@ -213,6 +216,9 @@ router.get("/profile_:id", (req, res) => {
 
 
 //////////////////////////////////////////////////////
+router.get("/compose", (req, res) => {
+
+});
 
 
 router.get("/upload-photos", (req, res) => {

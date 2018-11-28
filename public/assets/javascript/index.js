@@ -1,63 +1,81 @@
-function displayLogin() {
-    $("#ani-signup").fadeOut(200);
-    $("#ani-login").fadeIn(1000);
-}
+// function displayLogin() {
+//     $("#npm -signup").fadeOut(200);
+//     $("#ani-login").fadeIn(1000);
+// }
 
-function displaySignup() {
-    $("#ani-login").fadeOut(200);
-    $("#ani-signup").fadeIn(1000);
-}
+// function displaySignup() {
+//     $("#ani-login").fadeOut(200);
+//     $("#ani-signup").fadeIn(1000);
+// }
 
-// Stop a function from running too many times
-function debounce(func, wait = 10, immediate = true) {
-    let timeout;
+// // Stop a function from running too many times
+// function debounce(func, wait = 10, immediate = true) {
+//     let timeout;
 
-    return function() {
-        const context = this, args = arguments;
+//     return function() {
+//         const context = this, args = arguments;
 
-        function later() {
-            timeout = null;
+//         function later() {
+//             timeout = null;
 
-            if (!immediate) func.apply(context, args);
-        };
+//             if (!immediate) func.apply(context, args);
+//         };
 
-        const callNow = immediate && !timeout;
+//         const callNow = immediate && !timeout;
         
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+//         clearTimeout(timeout);
+//         timeout = setTimeout(later, wait);
         
-        if (callNow) func.apply(context, args);
-    };
-}
+//         if (callNow) func.apply(context, args);
+//     };
+// }
 
-function detectDevice() {
-    switch ($("#ani-device-detector").css("font-size")) {
-        // Extra large, large
-        case "4px":
-        case "3px":
-            $(".ani-index").addClass("ani-vertical-align-wrapper");
-            $(".ani-index").css({"margin": "0"});
+// function detectDevice() {
+//     switch ($("#ani-device-detector").css("font-size")) {
+//         // Extra large, large
+//         case "4px":
+//         case "3px":
+//             $(".ani-index").addClass("ani-vertical-align-wrapper");
+//             $(".ani-index").css({"margin": "0"});
 
-            break;
+//             break;
 
-        // Medium, small
-        case "2px":
-        case "1px":
-            $(".ani-index").removeClass("ani-vertical-align-wrapper");
-            $(".ani-index").css({"margin": "2.5em 0"});
+//         // Medium, small
+//         case "2px":
+//         case "1px":
+//             $(".ani-index").removeClass("ani-vertical-align-wrapper");
+//             $(".ani-index").css({"margin": "2.5em 0"});
 
-            break;
+//             break;
 
-    }
-}
+//     }
+// }
 
-// Check device size before page loads and when window is resized
-detectDevice();
+// // Check device size before page loads and when window is resized
+// detectDevice();
 
-$(window).resize(debounce(detectDevice));
+// $(window).resize(debounce(detectDevice));
 
 $(document).ready(function() {
-    displaySignup();
+    ///cloudinary
+// const keys = require('../../../keys.js')
+// var cloudkey = new Cloudsearch(keys.cloudinary)
+// $.get()
+
+    // var cloudinary = require('cloudinary')
+    // $.cloudinary.config({ 
+    //     cloud_name: 'dm2obdaq7', 
+    //     api_key: '916353386216456', 
+    //     api_secret: 'YCyGM3utmOnYGLES_ckQFS-_RB4' 
+    //   });
+    
+    // const photoApi = cloudinary://916353386216456:YCyGM3utmOnYGLES_ckQFS-_RB4@dm2obdaq7
+    // var cloudinary = require('cloudinary')
+    //cloudinary.v2.api.resources(function(error, result){console.log(result)});
+
+    // cloudinary.uploader.upload("my_picture.jpg", function(result) { console.log(result) })
+
+    // displaySignup();
     
     // Dropdown menu
     $(".dropdown-button").dropdown();
