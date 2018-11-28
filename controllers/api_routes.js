@@ -218,7 +218,21 @@ router.delete("/delete-account_:id", (req, res) => {
     Set up routes (related to stories)
 ***********************************/
 
+router.post("/upload-photos", upload.single("file"), (req, res, next) => {
+    if (!req.file.mimetype.startsWith("image/")) {
+        return res.status(422).json({
+            "error": "The uploaded file must be an image."
+        });
+    };
+    const dimensions = sizeOf(req.file.path);
+    if ((dimensions.width < 200) || (dimensions.height < 200)) {
+        return res.status(422).json({
+            "error": "The image must be at least 200 x 200px."
+        });
+    };
 
+    res.json(true);
+});
 
 
 
