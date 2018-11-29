@@ -2,11 +2,11 @@ $(document).ready(function () {
     // Dropdown menu
     $(".dropdown-button").dropdown();
 //added non working function to take urls and add them to photos
-event.preventDefault()
+// event.preventDefault()
     
     $("#ani-title")= titleInput
     $("#ani-caption")= captionInput
-$("#ani-form-compose").hide()
+// $("#ani-form-compose").hide()
 // $(document).on("submit","#addStory",postStory)
 // function previewIMG(full){
     
