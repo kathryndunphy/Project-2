@@ -40,6 +40,17 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         
+        "title": {
+            "type"     : DataTypes.STRING(100),
+            "allowNull": false,
+            "validate" : {
+                "len": {
+                    "args": [1, 100],
+                    "msg" : "Your title cannot exceed 100 characters."
+                }
+            }
+        }
+        
         // "time_taken": {
         //     "type"    : DataTypes.DATE,
         //     "validate": {

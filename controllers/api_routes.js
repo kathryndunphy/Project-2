@@ -225,23 +225,24 @@ router.get("api/story/:id", (req, res)=>{
             "id": req.params.id
           },
           include: [Photo]
-    })
+    }).then(res.json(story))
 })
 //change to compose-ch
-router.post("api/index", (req, res)=>{
+router.post("api/compose", (req, res)=>{
     // const aniId = req.cookies["aniId"] 
     
     Photo.create({
         "url": photoUrls[2],
         "thumbnail": photoUrls[1],
-        "caption": req.body.caption
-    }).then()
+        "caption": req.body.caption,
+        "title": req.body.title
+    }).then(res.json(photo))
 
 })
 
 
 //change to compose- ch
-router.post("/api/index", (req, res) => {
+router.post("/api/compose", (req, res) => {
     // const aniId = req.cookies["aniId"]
     Story.create({
         "title": req.body.title

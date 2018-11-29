@@ -2,36 +2,38 @@ $(document).ready(function () {
     // Dropdown menu
     $(".dropdown-button").dropdown();
 //added non working function to take urls and add them to photos
-    function uploadPhoto() {
-        //define urls either as object or variables
-        let thumbUrl = ""
-        let photoUrl = ""
-        var widget = cloudinary.createUploadWidget({
-            cloudName: "dm2obdaq7",
-            uploadPreset: "doggie",
-            cropping: "server"
-        }, (error, result) => {
-            console.log(result)
-            //forEach function for results to urls
-            
-            if (result.event === "success"){
-                thumbUrl = result.info.thumbnail_url
-                photoUrl = result.info.url 
-                
-            }
+function openWidget(){
+    const  photoUrls = []
+    var widget = cloudinary.createUploadWidget({
+        cloudName: "dm2obdaq7",
+        uploadPreset: "doggie",
+        cropping: "server"
+    }, (error, result) => {
+        console.log(result)
+        
+        /// checks for successful upload then saves values to an array let photoUrls = []
+        if (result.event === "success"){
+            photoUrls.push(result.info.thumbnail_url)
+            photoUrls.push(result.info.url) 
+            $
+        }
 
-        });
-        widget.open("https://my.example.come/my_example_image.jpg");
-        cloudinary.applyUploadWidget('#upload_widget_opener', {
-            cloudName: 'dm2obdaq7',
-            uploadPreset: 'doggie',
-            tags: [""],
-            cropping: true,
-            folder: 'doggie'
-        }, (error, result) => {
-            createPhotoRef(result)
-        });
-    }
+    });
+    console.log(photoUrls)
+    widget.open("https://my.example.come/my_example_image.jpg");
+    cloudinary.applyUploadWidget('#upload_widget_opener', {
+        cloudName: 'dm2obdaq7',
+        uploadPreset: 'doggie',
+        tags: [""],
+        cropping: true,
+        folder: 'doggie'
+    }, (error, result) => {
+        
+    });
+
+}
+
+openWidget()
 
     function createPhotoRef(){
         showPhoto(results)
