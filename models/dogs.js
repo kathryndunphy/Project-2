@@ -16,6 +16,20 @@ module.exports = function(sequelize, DataTypes) {
                     "msg" : "Please enter a valid UUID."
                 }
             }
+        },
+        "Dog_name":{
+            "type": DataTypes.STRING,
+            "allowNull": false,
+            "validate" : {
+                "is": {
+                    "args": /^[a-z\s-']+$/i,
+                    "msg" : "Only letters, spaces, hyphens, and apostrophes are allowed."
+                },
+                "len": {
+                    "args": [1, 100],
+                    "msg" : "Your name cannot exceed 100 characters."
+                }
+            }
         }
 
     }, {"underscored": true});

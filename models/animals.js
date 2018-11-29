@@ -37,6 +37,22 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
+        ///added pet name
+        "pet": {
+            "type"     : DataTypes.STRING(32),
+            "allowNull": false,
+            "unique"   : true,
+            "validate" : {
+                "is": {
+                    "args": /^[a-z0-9.]+$/i,
+                    "msg" : "Only letters, numbers, and periods are allowed."
+                },
+                "len": {
+                    "args": [1, 32],
+                    "msg" : "The pet name must have between 1 and 32 characters."
+                }
+            }
+        },
 
         "username": {
             "type"     : DataTypes.STRING(32),

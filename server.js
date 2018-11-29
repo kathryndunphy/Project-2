@@ -56,11 +56,11 @@ app.set("view engine", ".hbs");
 //https://www.npmjs.com/package/aws-sdk
 
 //https://res.cloudinary.com/
-// cloudinary.config({ 
-//     cloud_name: 'dm2obdaq7', 
-//     api_key: '916353386216456', 
-//     api_secret: 'YCyGM3utmOnYGLES_ckQFS-_RB4' 
-//   });
+cloudinary.config({ 
+    cloud_name: 'dm2obdaq7', 
+    api_key: '916353386216456', 
+    api_secret: 'YCyGM3utmOnYGLES_ckQFS-_RB4' 
+  });
  
 // Set google cloud
 // https://www.npmjs.com/package/@google-cloud/storage

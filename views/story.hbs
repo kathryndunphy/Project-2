@@ -6,7 +6,8 @@
         <h2>by {{animal.fullname}}</h2>
 
         <div class="ani-separator-3"></div>
-        
+        {{!-- added class storyBoard --}}
+        <form class = "storyBoard">
         {{#each photos}}
         <div class="card" id="card{{@index}}">
             <div class="card-image ani-card">
@@ -17,7 +18,7 @@
                 <p>{{this.caption}}</p>
             </div>
         </div>
-
+        </form>
         <div class="ani-separator-3"></div>
         {{/each}}
     </div>

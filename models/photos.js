@@ -6,8 +6,19 @@ module.exports = function(sequelize, DataTypes) {
             "allowNull"   : false,
             "primaryKey"  : true
         },
-        
+
         "url": {
+            "type"     : DataTypes.STRING,
+            "allowNull": false,
+            "validate" : {
+                "isURL": {
+                    "args": true,
+                    "msg" : "Please enter a valid url."
+                }
+            }
+        },
+        ///added url for thumbnail
+        "thumbUrl": {
             "type"     : DataTypes.STRING,
             "allowNull": false,
             "validate" : {
@@ -29,15 +40,15 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         
-        "time_taken": {
-            "type"    : DataTypes.DATE,
-            "validate": {
-                "isDate": {
-                    "args": true,
-                    "msg" : "Please enter a valid date string."
-                }
-            }
-        }
+        // "time_taken": {
+        //     "type"    : DataTypes.DATE,
+        //     "validate": {
+        //         "isDate": {
+        //             "args": true,
+        //             "msg" : "Please enter a valid date string."
+        //         }
+        //     }
+        // }
 
     }, {"underscored": true});
 

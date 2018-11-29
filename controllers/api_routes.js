@@ -206,7 +206,7 @@ router.delete("/delete-account_:id", (req, res) => {
         }
 
         Animal.destroy({
-            "where": {"id": req.params.id}
+            "where": {"id": req.params.id},
 
         }).then(callback);
 
@@ -218,7 +218,54 @@ router.delete("/delete-account_:id", (req, res) => {
     Set up routes (related to stories)
 ***********************************/
 
+///added routes ch
+router.get("api/story/:id", (req, res)=>{
+    Story.findAll({
+        "where": {
+            "id": req.params.id
+          },
+          include: [Photo]
+    })
+})
+//change to compose-ch
+router.post("api/index", (req, res)=>{
+    // const aniId = req.cookies["aniId"] 
+    
+    Photo.create({
+        "url": photoUrls[2],
+        "thumbnail": photoUrls[1],
+        "caption": req.body.caption
+    }).then()
 
+})
+
+
+//change to compose- ch
+router.post("/api/index", (req, res) => {
+    // const aniId = req.cookies["aniId"]
+    Story.create({
+        "title": req.body.title
+
+    }).then( console.log(res))
+})
+
+router.delete("api/story: id", (req, res)=>{
+    const aniId = req.cookies["aniId"]
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
+
+    // Only the user can delete their stories
+    } else if (req.params.id !== aniId) {
+        res.redirect("/");
+
+    } else {   
+        Story.destroy({
+            "where": {"id": req.params.id},
+            include:[Photo]
+        }) 
+        res.redirect("/story")
+    }
+})
 
 
 
