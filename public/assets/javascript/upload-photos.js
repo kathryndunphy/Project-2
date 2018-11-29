@@ -4,8 +4,8 @@ $(document).ready(function () {
 //added non working function to take urls and add them to photos
 // event.preventDefault()
     
-    $("#ani-title")= titleInput
-    $("#ani-caption")= captionInput
+    // $("#ani-title")= titleInput
+    // $("#ani-caption")= captionInput
 // $("#ani-form-compose").hide()
 // $(document).on("submit","#addStory",postStory)
 // function previewIMG(full){
