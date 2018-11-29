@@ -47,12 +47,12 @@ function openWidget(){
         console.log(result)
         
         /// checks for successful upload then saves values to an array let photoUrls = []
-        if (result.event === "success"){
-            photoUrls.push(result.info.thumbnail_url)
-            photoUrls.push(result.info.url) 
-            console.log(photoUrls)
-            showTitleForm(photoUrls)
-        }
+        // if (result.event === "success"){
+        //     photoUrls.push(result.info.thumbnail_url)
+        //     photoUrls.push(result.info.url) 
+        //     console.log(photoUrls)
+        //     showTitleForm(photoUrls)
+        // }
 
         // function handleStory(photoUrls){
             
