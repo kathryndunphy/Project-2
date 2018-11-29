@@ -17,7 +17,7 @@ const Photo  = models.Photo;
 const Dog    = models.Dog;
 
 // Ani team
-const AniTeam = [
+const aniTeam = [
     {
         "fullname"    : "sohai9",
         "url_photo"   : "assets/images/0.jpg",
@@ -45,11 +45,10 @@ const AniTeam = [
 ];
 
 // Source: https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-guid
-function isValidCookie(UUID) {
+function isValidCookie(uuid) {
     const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    console.log(UUID)
-    console.log(regex.test(UUID))
-    return (UUID && regex.test(UUID));
+
+    return (uuid && regex.test(uuid));
 }
 
 // Pass these values if the user is not logged in
@@ -72,12 +71,10 @@ router.get("/", (req, res) => {
 
     // Display homepage if the user is not logged in or does not have a valid cookie
     if (!isValidCookie(aniId)) {
-        console.log('bad login')
         res.render("index", defaultValues);
 
     // Display the profile page if the user is logged in
     } else {
-        
         function callback(results) {
             const stories = [];
 
@@ -89,7 +86,7 @@ router.get("/", (req, res) => {
                 });
             }
 
-            // TODO: Calculate the number of stories, Animals, and Dogs based on queries********
+            // TODO: Calculate the number of stories, Animals, and Dogs based on queries
             const animal = {
                 "fullname"     : results[0].dataValues.fullname,
                 "url_photo"    : results[0].dataValues.url_photo,
@@ -216,13 +213,25 @@ router.get("/profile_:id", (req, res) => {
 
 
 //////////////////////////////////////////////////////
-router.get("/compose", (req, res) => {
-
-});
 
 
 router.get("/upload-photos", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+    
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
 
+    } else {
+        // Must include dropzone before calling upload-photos.js
+        res.render("upload-photos", {
+            aniId,
+            aniFullname,
+            "customCSS"       : ["dropzone/dropzone", "style"],
+            "customJavascript": ["dropzone/dropzone", "upload-photos"]
+        });
+
+    }
 });
 
 router.get("/create-story", (req, res) => {
