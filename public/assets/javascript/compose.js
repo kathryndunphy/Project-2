@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".dropdown-button").dropdown();
 //added non working function to take urls and add them to photos
 event.preventDefault()
-    ///cloudinary
+    
     $("#ani-title")= titleInput
     $("#ani-caption")= captionInput
 $("#ani-form-compose").hide()
