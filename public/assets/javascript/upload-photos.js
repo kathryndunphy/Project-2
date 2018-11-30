@@ -38,7 +38,7 @@ function postStory(data){
     $.post("/api/upload-photos",).then(console.log(data))
 
 
-
+}
 function showTitleForm(photoUrls){
     console.log(photoUrls)
     $("#ani-form-compose").show()
@@ -88,4 +88,4 @@ openWidget()
     $(".button-collapse").sideNav({
         "closeOnClick": true
     });
-});
+})
