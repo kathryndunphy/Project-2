@@ -12,12 +12,18 @@ $(document).ready(function () {
     
 //     $("#previewIMG").src = full
 // }
+
+// let photoUrls = []
 function prepareStory(thumb, full){
     let small = thumb
     let fullSize = full
-    $(document).on("submit", function(small, fullSize){
+    $("#addStory").on("submit", function(small, fullSize){
         $("#ani-title")= titleInput
-    $("#ani-caption")= captionInput
+        $("#ani-caption")= captionInput
+        console.log(small)
+        console.log(fullSize)
+        console.log(titleInput)
+        console.log(captionInput)
         postStory({
 
             small: thumbnail,
@@ -28,13 +34,14 @@ function prepareStory(thumb, full){
     })
 
 }
+
 function showTitleForm(photoUrls){
     console.log(photoUrls)
     let thumb = photoUrls[0]
     let full = photoUrls[1]
     $("#ani-form-compose").show()
     
-    postStory(thumb, full)
+    prepareStory(thumb, full)
 
 }
 function openWidget(){
