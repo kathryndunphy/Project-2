@@ -13,27 +13,29 @@ $(document).ready(function () {
 //     $("#previewIMG").src = full
 // }
 
-// let photoUrls = []
-function prepareStory(thumb, full){
-    let small = thumb
-    let fullSize = full
-    $("#addStory").on("submit", function(small, fullSize){
-        $("#ani-title")= titleInput
-        $("#ani-caption")= captionInput
-        console.log(small)
-        console.log(fullSize)
-        console.log(titleInput)
-        console.log(captionInput)
-        postStory({
+let photoUrls = []
 
-            small: thumbnail,
-            fullSize: url,
-            titleInput: title,
-            captionInput: title
-        })
-    })
 
-}
+// function postStory(thumb, full){
+//     let small = thumb
+//     let fullSize = full
+//     $("#ani-form-compose").on("submit", function(small, fullSize){
+//         $("#ani-title")= titleInput
+//         $("#ani-caption")= captionInput
+//         console.log(small)
+//         console.log(fullSize)
+//         console.log(titleInput)
+//         console.log(captionInput)
+//         postStory({
+
+//             small: thumbnail,
+//             fullSize: url,
+//             titleInput: title,
+//             captionInput: title
+//         })
+//     })
+
+// }
 
 function showTitleForm(photoUrls){
     console.log(photoUrls)
@@ -41,11 +43,11 @@ function showTitleForm(photoUrls){
     let full = photoUrls[1]
     $("#ani-form-compose").show()
     
-    prepareStory(thumb, full)
+    postStory(thumb, full)
 
 }
 function openWidget(){
-    const  photoUrls = []
+    // const  photoUrls = []
     var widget = cloudinary.createUploadWidget({
         cloudName: "dm2obdaq7",
         uploadPreset: "doggie",
