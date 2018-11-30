@@ -4,32 +4,34 @@
 
 // Import packages
 const express = require("express");
-const path    = require("path");
+const path = require("path");
 
 // Create an instance of Router
 const router = express.Router();
 
 // Import bcrypt
-const bcrypt     = require("bcrypt");
+const bcrypt = require("bcrypt");
 const saltRounds = 12;
 
 // Import Dropzone
 const multer = require("multer");
-const upload = multer({"dest": "uploads"});
+const upload = multer({
+    "dest": "uploads"
+});
 const sizeOf = require("image-size");
 
 // Cookie will expire in 1 week
 const cookieOptions = {
-    "expires" : new Date(Date.now() + 604800000),
+    "expires": new Date(Date.now() + 604800000),
     "httpOnly": (process.argv[2] !== "local"),
-    "secure"  : (process.argv[2] !== "local")
+    "secure": (process.argv[2] !== "local")
 };
 
 // Talk to the models
 const models = require(path.join(__dirname, "..", "models"));
 const Animal = models.Animal;
-const Story  = models.Story;
-const Photo  = models.Photo;
+const Story = models.Story;
+const Photo = models.Photo;
 const Dog = models.Dog;
 
 // Default profile photos
@@ -54,9 +56,9 @@ function isValidCookie(uuid) {
 
 // Pass these values if the user is not logged in
 const defaultValues = {
-    "aniId"           : null,
-    "aniFullname"     : null,
-    "customCSS"       : ["style"],
+    "aniId": null,
+    "aniFullname": null,
+    "customCSS": ["style"],
     "customJavascript": ["index"]
 };
 
@@ -75,10 +77,10 @@ router.post("/signup", (req, res) => {
     // Salt and hash the user's password
     bcrypt.hash(req.body.password, saltRounds, (error, hash) => {
         Animal.create({
-            "fullname" : req.body.fullname,
-            "email"    : req.body.email,
-            "username" : req.body.username,
-            "hash"     : hash,
+            "fullname": req.body.fullname,
+            "email": req.body.email,
+            "username": req.body.username,
+            "hash": hash,
             "url_photo": defaultPhotos[Math.floor(defaultPhotos.length * Math.random())]
 
         }).then(callback);
@@ -90,7 +92,9 @@ router.post("/login", (req, res) => {
     // Find the user's hash
     Animal.findAll({
         "attributes": ["id", "fullname", "hash"],
-        "where"     : {"username": req.body.username}
+        "where": {
+            "username": req.body.username
+        }
 
     }).then(results => {
         // Compare hashes to verify the user
@@ -103,7 +107,7 @@ router.post("/login", (req, res) => {
 
                 res.redirect("/");
 
-            // TODO: If the username or password does not match, display an error message
+                // TODO: If the username or password does not match, display an error message
             } else {
                 res.redirect("/");
 
@@ -114,14 +118,14 @@ router.post("/login", (req, res) => {
 
 
 router.patch("/update-profile_:id", (req, res) => {
-    const aniId       = req.cookies["aniId"];
+    const aniId = req.cookies["aniId"];
     const aniFullname = req.cookies["aniFullname"];
 
     // Display homepage if the user is not logged in or does not have a valid cookie
     if (!isValidCookie(aniId)) {
         res.render("index", defaultValues);
 
-    // Only the user can edit their profile
+        // Only the user can edit their profile
     } else if (req.params.id !== aniId) {
         res.redirect("/");
 
@@ -134,11 +138,13 @@ router.patch("/update-profile_:id", (req, res) => {
 
         Animal.update({
             "fullname": req.body.fullname,
-            "email"   : req.body.email,
+            "email": req.body.email,
             "username": req.body.username
 
         }, {
-            "where": {"id" : req.params.id}
+            "where": {
+                "id": req.params.id
+            }
 
         }).then(callback);
 
@@ -147,13 +153,13 @@ router.patch("/update-profile_:id", (req, res) => {
 
 
 router.patch("/update-password_:id", (req, res) => {
-    const aniId       = req.cookies["aniId"];
+    const aniId = req.cookies["aniId"];
     const aniFullname = req.cookies["aniFullname"];
 
     if (!isValidCookie(aniId)) {
         res.render("index", defaultValues);
 
-    // Only the user can edit their password
+        // Only the user can edit their password
     } else if (req.params.id !== aniId) {
         res.redirect("/");
 
@@ -165,7 +171,9 @@ router.patch("/update-password_:id", (req, res) => {
         // Find the user's hash
         Animal.findAll({
             "attributes": ["hash"],
-            "where"     : {"id": req.params.id}
+            "where": {
+                "id": req.params.id
+            }
 
         }).then(results => {
             // Verify the user
@@ -173,8 +181,12 @@ router.patch("/update-password_:id", (req, res) => {
                 if (isMatch) {
                     // Salt and hash the new password
                     bcrypt.hash(req.body.password_new, saltRounds, (error, hash) => {
-                        Animal.update({hash}, {
-                            "where": {"id": req.params.id}
+                        Animal.update({
+                            hash
+                        }, {
+                            "where": {
+                                "id": req.params.id
+                            }
 
                         });
                     });
@@ -188,13 +200,13 @@ router.patch("/update-password_:id", (req, res) => {
 
 
 router.delete("/delete-account_:id", (req, res) => {
-    const aniId       = req.cookies["aniId"];
+    const aniId = req.cookies["aniId"];
     const aniFullname = req.cookies["aniFullname"];
 
     if (!isValidCookie(aniId)) {
         res.render("index", defaultValues);
 
-    // Only the user can delete their stories
+        // Only the user can delete their stories
     } else if (req.params.id !== aniId) {
         res.redirect("/");
 
@@ -206,7 +218,9 @@ router.delete("/delete-account_:id", (req, res) => {
         }
 
         Animal.destroy({
-            "where": {"id": req.params.id}
+            "where": {
+                "id": req.params.id
+            }
 
         }).then(callback);
 
@@ -217,25 +231,53 @@ router.delete("/delete-account_:id", (req, res) => {
 /**********************************
     Set up routes (related to stories)
 ***********************************/
-router.post("api/upload-photos", (req, res)=>{
+router.get("api/story/:id", (req, res) => {
+    Story.findAll({
+        "where": {
+            "id": req.params.id
+        },
+        include: [Photo]
+    }).then(res.json(story))
+})
+
+router.post("api/upload-photos", (req, res) => {
     console.log(req.body)
-        // const aniId = req.cookies["aniId"] 
-        
-        Photo.create({
-            // "url": photoUrls[2],
-            // "thumbnail": photoUrls[1],
-            "caption": req.body.caption,
-            "title": req.body.title
-        }).then(console.log(res))
-    
-    })
-    router.post("/api/upload-photos", (req, res) => {
-        //     // const aniId = req.cookies["aniId"]
-            Story.create({
-                "title": req.body.title
-        
-            }).then( console.log(res))
+    // const aniId = req.cookies["aniId"] 
+
+    Photo.create({
+        "url": photoUrls[2],
+        "thumbnail": photoUrls[1],
+        "caption": req.body.caption,
+        "title": req.body.title
+    }).then(res.redirect("/story"))
+
+})
+router.post("/api/upload-photos", (req, res) => {
+    //     // const aniId = req.cookies["aniId"]
+    Story.create({
+        "title": req.body.title
+
+    }).then(res.redirect("/story"))
+})
+router.delete("api/story: id", (req, res) => {
+    const aniId = req.cookies["aniId"]
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
+
+        // Only the user can delete their stories
+    } else if (req.params.id !== aniId) {
+        res.redirect("/");
+
+    } else {
+        Story.destroy({
+            "where": {
+                "id": req.params.id
+            },
+            include: [Photo]
         })
+        res.redirect("/story")
+    }
+})
 
 // router.post("/upload-photos", upload.single("file"), (req, res, next) => {
 //     if (!req.file.mimetype.startsWith("image/")) {
