@@ -239,7 +239,7 @@ router.get("/create-story", (req, res) => {
 });
 
 router.get("/story_:id", (req, res) => {
-
+    
 });
 
 router.get("/edit-story_:aniId&:storyId", (req, res) => {
