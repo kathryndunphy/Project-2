@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
 
         "url": {
             "type"     : DataTypes.STRING,
-            "allowNull": false,
+            "allowNull": true,
             "validate" : {
                 "isURL": {
                     "args": true,
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
         ///added url for thumbnail
         "thumbUrl": {
             "type"     : DataTypes.STRING,
-            "allowNull": false,
+            "allowNull": true,
             "validate" : {
                 "isURL": {
                     "args": true,
@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
-        
+
         "title": {
             "type"     : DataTypes.STRING(100),
             "allowNull": false,
