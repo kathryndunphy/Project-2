@@ -67,7 +67,7 @@ function openWidget(){
         //}
     });
     console.log(photoUrls)
-    widget.open("https://my.example.come/my_example_image.jpg");
+    widget.open("../images/1.jpg");
     cloudinary.applyUploadWidget('#upload_widget_opener', {
         cloudName: 'dm2obdaq7',
         uploadPreset: 'doggie',
