@@ -222,20 +222,21 @@ router.post("api/upload-photos", (req, res)=>{
         // const aniId = req.cookies["aniId"] 
         
         Photo.create({
-            "url": photoUrls[2],
-            "thumbnail": photoUrls[1],
+            // "url": photoUrls[2],
+            // "thumbnail": photoUrls[1],
             "caption": req.body.caption,
             "title": req.body.title
         }).then(console.log(res))
     
     })
-    router.post("/api/upload-phot", (req, res) => {
+    router.post("/api/upload-photos", (req, res) => {
         //     // const aniId = req.cookies["aniId"]
             Story.create({
                 "title": req.body.title
         
             }).then( console.log(res))
         })
+
 // router.post("/upload-photos", upload.single("file"), (req, res, next) => {
 //     if (!req.file.mimetype.startsWith("image/")) {
 //         return res.status(422).json({
