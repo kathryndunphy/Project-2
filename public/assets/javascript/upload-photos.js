@@ -6,44 +6,44 @@ $(document).ready(function () {
     
     // $("#ani-title")= titleInput
     // $("#ani-caption")= captionInput
-// $("#ani-form-compose").hide()
-// $(document).on("submit","#addStory",postStory)
+$("#ani-form-compose").hide()
+$(document).on("submit","#addStory",prepareStory)
 // function previewIMG(full){
     
 //     $("#previewIMG").src = full
 // }
-
+let captionInput = $("#ani-title")
+let titleInput = $("#ani-caption")
 let photoUrls = []
 
+function prepareStory(event){
+    event.preventDefault()
+    if (!captionInput.val().trim() || !titleInput.val().trim() || photoUrls.length<1) {
+        return;
+      }
+      console.log(photoUrls)
+      console.log(titleInput)
+      console.log(captionInput)
+       postStory({
+        title: titleInput,
+        caption: captionInput,
+        thumbUrl: photoUrls[0],
+        url: photoUrls[1]
+       })  
+      
 
-// function postStory(thumb, full){
-//     let small = thumb
-//     let fullSize = full
-//     $("#ani-form-compose").on("submit", function(small, fullSize){
-//         $("#ani-title")= titleInput
-//         $("#ani-caption")= captionInput
-//         console.log(small)
-//         console.log(fullSize)
-//         console.log(titleInput)
-//         console.log(captionInput)
-//         postStory({
+}
 
-//             small: thumbnail,
-//             fullSize: url,
-//             titleInput: title,
-//             captionInput: title
-//         })
-//     })
+function postStory(data){
+    $.post("/api/upload-photos",).then(console.log(data))
 
-// }
+
 
 function showTitleForm(photoUrls){
     console.log(photoUrls)
-    let thumb = photoUrls[0]
-    let full = photoUrls[1]
     $("#ani-form-compose").show()
     
-    postStory(thumb, full)
+    
 
 }
 function openWidget(){
