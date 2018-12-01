@@ -62,7 +62,7 @@ var widget = cloudinary.createUploadWidget({
     console.log(result)
     
     /// checks for successful upload then saves values to an array let photoUrls = []
-    if (result.event === "success"){
+    if (result.event == "success"){
         
         url.push(result.info.url) 
         
@@ -106,7 +106,7 @@ function send() {
     }
 
     let payload = {
-        urls: url,
+        urls: files,
         captions: captions,
         title: document.getElementById("title").value
     }
@@ -123,7 +123,7 @@ function close() {
     document.getElementById("add_dialogue").innerHTML = "";
 }
 
-function publish() {
+function publish(url) {
                                 ///changed from dropzone//
    let files = url//document.forms[0].cloudinary.files
 
