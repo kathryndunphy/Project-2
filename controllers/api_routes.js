@@ -253,7 +253,7 @@ router.get("api/story/: id", (req, res) => {
 
 // })
 router.post("/api/upload-photos: id", (req, res) => {
-    //     // const aniId = req.cookies["aniId"]
+    const aniId = req.cookies["aniId"]
     Story.create({
         "title": req.body.title
 

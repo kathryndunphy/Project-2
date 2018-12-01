@@ -35,17 +35,16 @@ function prepareStory(event){
 }
 
 function postStory(data){
-    $.post("/api/upload-photos",).then(console.log(data))
+    $.post("/api/upload-photos",data).then(res.redirect("/story"))
 
 
 }
 function showTitleForm(photoUrls){
     console.log(photoUrls)
     $("#ani-form-compose").show()
-    
-    
-
 }
+queryselector("#")
+
 function openWidget(){
     // const  photoUrls = []
     var widget = cloudinary.createUploadWidget({
