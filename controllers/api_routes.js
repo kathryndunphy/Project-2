@@ -252,18 +252,29 @@ router.get("api/story/: id", (req, res) => {
 //     }).then(res.redirect("/story"))
 
 // })
-router.post("/api/upload-photos", (req, res) => {
-    // const aniId = req.cookies["aniId"]
+router.post("/api/upload-photos: id", (req, res) => {
+    const aniId = req.cookies["aniId"];
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
+    }else if (req.params.id !== aniId) {
+        res.redirect("/");
+
+    } else {
+        function callback(result) {
+            res.redirect("/story");
+            console.log(result);
+        }
     Story.create({
         "title": req.body.title,
         "caption": req.body.caption
 
-    }).then(function(result){res.json(result)})
-})
+    }).then(res.json(result));
+}
+});
 router.delete("api/story: id", (req, res) => {
     const aniId = req.cookies["aniId"]
     if (!isValidCookie(aniId)) {
-        res.render("/story", defaultValues);
+        res.render("/index", defaultValues);
 
         // Only the user can delete their stories
     } else if (req.params.id !== aniId) {
