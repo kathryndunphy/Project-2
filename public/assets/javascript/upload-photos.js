@@ -52,8 +52,42 @@ let captions = [];
 // };
 /////////////////////
 //////cloudinary/////
-/////////////////////
+// /////////////////////
+// let url = [];
+// let captions = [];
+// var widget = cloudinary.createUploadWidget({
+//     cloudName: "dm2obdaq7",
+//     uploadPreset: "doggie",
+//     cropping: "server"
+// }, (error, result) => {
+//     console.log(result)
+    
+//     /// checks for successful upload then saves values to an array let photoUrls = []
+//     if (result.event == "success"){
+        
+//         url.push(result.info.url) 
+        
+//     }
+    
+// });
+// widget.open("../images/1.jpg")
+// cloudinary.applyUploadWidget('#upload_widget_opener', {
+//     cloudName: 'dm2obdaq7',
+//     uploadPreset: 'doggie',
+//     tags: [""],
+//     cropping: true,
+//     folder: 'doggie'
+// }, (error, result) => {
+    
+// });
 
+
+$(document).ready(function () {
+    /////////////////////
+//////cloudinary/////
+/////////////////////
+let url = [];
+let captions = [];
 var widget = cloudinary.createUploadWidget({
     cloudName: "dm2obdaq7",
     uploadPreset: "doggie",
@@ -79,9 +113,6 @@ cloudinary.applyUploadWidget('#upload_widget_opener', {
 }, (error, result) => {
     
 });
-
-
-$(document).ready(function () {
     // Dropdown menu
     $(".dropdown-button").dropdown();
 
@@ -90,7 +121,7 @@ $(document).ready(function () {
         "closeOnClick": true
     });
 
-});
+// });
 
 function send() {
                             ////changed from dropzone////
@@ -126,7 +157,7 @@ function close() {
 function publish(url) {
                                 ///changed from dropzone//
    let files = url//document.forms[0].cloudinary.files
-
+console.log(files)
     let input = '<label>Title for $FILE_NAME</label><input type="text" id="$ID">';
     let button = '<button onclick="send()" type="submit" class="btn-large waves-effect waves-light" title="Click to Submit.">Submit</button>'
     let close_button = ''//'<button onclick="close()" class="btn-large waves-effect waves-light" title="Click to Cancel.">Cancel</button>';
@@ -155,3 +186,4 @@ function publish(url) {
         }
     };
 }
+});
