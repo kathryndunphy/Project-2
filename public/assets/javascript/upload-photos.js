@@ -43,7 +43,7 @@ function showTitleForm(photoUrls){
     console.log(photoUrls)
     $("#ani-form-compose").show()
 }
-queryselector("#")
+
 
 function openWidget(){
     // const  photoUrls = []
