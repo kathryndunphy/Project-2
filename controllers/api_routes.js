@@ -274,7 +274,7 @@ router.delete("api/story: id", (req, res) => {
             "where": {
                 "id": req.params.id
             },
-            include: [Photo]
+            // include: [Photo]
         })
         res.redirect("/story")
     }
