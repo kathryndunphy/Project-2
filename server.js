@@ -80,6 +80,6 @@ app.use("/api", router_api);
 ***********************************/
 
 // Uncomment force to reset the database
-aniDB.sequelize.sync(/*{"force": true}*/).then(function() {
+aniDB.sequelize.sync({"force": true}).then(function() {
     app.listen(PORT, () => console.log(`App listening on ${PORT}.`));
 });
