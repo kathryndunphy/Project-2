@@ -240,19 +240,19 @@ router.get("api/story/: id", (req, res) => {
     }).then(res.json(story))
 })
 
-router.post("api/story/: id", (req, res) => {
+// router.post("api/story/: id", (req, res) => {
     
-    // const aniId = req.cookies["aniId"] 
+//     // const aniId = req.cookies["aniId"] 
 
-    Photo.create({
-        "url": photoUrls[1],
-        "thumbnail": photoUrls[0],
-        "caption": req.body.caption,
-        "title": req.body.title
-    }).then(res.redirect("/story"))
+//     Photo.create({
+//         "url": photoUrls[1],
+//         "thumbnail": photoUrls[0],
+//         "caption": req.body.caption,
+//         "title": req.body.title
+//     }).then(res.redirect("/story"))
 
-})
-router.post("/api/upload-photos", (req, res) => {
+// })
+router.post("/api/upload-photos: id", (req, res) => {
     //     // const aniId = req.cookies["aniId"]
     Story.create({
         "title": req.body.title
