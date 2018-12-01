@@ -80,7 +80,7 @@ cloudinary.applyUploadWidget('#upload_widget_opener', {
     
 });
 
-$(document).ready(function (url,captions) {
+$(document).ready(function () {
     /////////////////////
 //////cloudinary/////
 /////////////////////
