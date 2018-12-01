@@ -94,9 +94,9 @@ $(document).ready(function () {
 
 function send() {
                             ////changed from dropzone////
-    // let files = document.forms[0].cloudinary.files;
+    let files = url//document.forms[0].cloudinary.files;
 
-    for (var i = 0; i < url.length; i++) {
+    for (var i = 0; i < files.length; i++) {
         // console.log(document.getElementById(i.toString()).value)
         if (document.getElementById(i.toString()).value == "") {
             return;
@@ -122,9 +122,7 @@ function send() {
 function close() {
     document.getElementById("add_dialogue").innerHTML = "";
 }
-$(".CloseButton dn db-ns btn-close-popup pointer absolute").on("click",  function caption(){
-    publish()
-})
+
 function publish() {
                                 ///changed from dropzone//
     // let files = document.forms[0].cloudinary.files
@@ -136,8 +134,8 @@ function publish() {
     let flag = false;
     let good_files = [];
 
-    for (var i = 0; i < url.length; i++) {
-        let element = url[i];
+    for (var i = 0; i < files.length; i++) {
+        let element = files[i];
         if (element.status == 'success') {
             flag = true;
             good_files.push(element);
@@ -146,9 +144,9 @@ function publish() {
 
             // url.push('http://test.com');
         }
-        if (i == url.length - 1) {
+        if (i == files.length - 1) {
             /////changed from dropzone////
-            url = good_files;
+            files = good_files;
             if (flag) {
                 html = html + "<br />" + button + "<br />" + close_button + "</dialog>";
                 document.getElementById("add_dialogue").innerHTML = html;
