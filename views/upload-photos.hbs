@@ -13,8 +13,8 @@
         <div class="card">
             <div class="card-content">
                 <div class="ani-separator-2"></div>
-
-                <form action="/api/upload-photos" method="POST" class="dropzone" id="ani-form-upload-photos" enctype="multipart/form-data">
+                                                                {{!-- changed from dropzone --}}
+                <form action="/api/upload-photos" method="POST" class="cloudinary" id="ani-form-upload-photos" enctype="multipart/form-data">
                     <div class="fallback">
                         <label for="ani-photos" class="blue-grey-text text-darken-2">Photos</label>
                         <input type="file" name="photos" id="ani-photos" multiple>
@@ -26,7 +26,8 @@
         </div>
 
         {{!-- <form action="/api/create-story" method="POST"> --}}
-             <button onclick="publish()" type="submit" class="btn-large waves-effect waves-light" title="Click to publish.">Publish</button>
+        {{!-- commented out below --}}
+             {{!-- <button onclick="publish()" type="submit" class="btn-large waves-effect waves-light" title="Click to publish.">Publish</button> --}}
         {{!-- </form> --}}
         
         <div class="ani-separator-3"></div>

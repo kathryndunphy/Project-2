@@ -4,47 +4,72 @@ Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop photos here to uplo
 let url = [];
 let captions = [];
 
-Dropzone.options.uploadWidget = {
-    "paramName": "file",
-    "maxFilesize": 5, // MB
-    "maxFiles": 5,
-    "dictDefaultMessage": "Drop photos here to upload",
-    //     "headers": {
-    //         // TODO: Create a random CSRF (Cross-Site Request Forgery) token for extra security measure
-    // //      "x-csrf-token": document.querySelectorAll("meta[name=csrf-token]")[0].getAttributeNode("content").value
-    //         "x-csrf-token": "TODO_CREATE_A_RANDOM_TOKEN_HERE"
-    //     },
-    "acceptedFiles": "image/*",
 
-    "init": function () {
-        this.on("success", (file, res) => {
-            console.log(file);
-            console.log(res);
-        });
+///////////////////////////
+////////dropzone//////////
+//////////////////////////
 
-        this.on("thumbnail", file => {
-            if (file.width < 200 || file.height < 200) {
-                file.rejectDimensions();
+// Dropzone.options.uploadWidget = {
+//     "paramName": "file",
+//     "maxFilesize": 5, // MB
+//     "maxFiles": 5,
+//     "dictDefaultMessage": "Drop photos here to upload",
+//     //     "headers": {
+//     //         // TODO: Create a random CSRF (Cross-Site Request Forgery) token for extra security measure
+//     // //      "x-csrf-token": document.querySelectorAll("meta[name=csrf-token]")[0].getAttributeNode("content").value
+//     //         "x-csrf-token": "TODO_CREATE_A_RANDOM_TOKEN_HERE"
+//     //     },
+//     "acceptedFiles": "image/*",
 
-            } else {
-                file.acceptDimensions();
+//     "init": function () {
+//         this.on("success", (file, res) => {
+//             console.log(file);
+//             console.log(res);
+//         });
 
-            }
-        });
-    },
+//         this.on("thumbnail", file => {
+//             if (file.width < 200 || file.height < 200) {
+//                 file.rejectDimensions();
 
-    "accept": function (file, done) {
+//             } else {
+//                 file.acceptDimensions();
 
-        file.acceptDimensions = done;
+//             }
+//         });
+//     },
 
-        file.rejectDimensions = function () {
-            done("The image must be at least 200 x 200");
-        };
-    }, 
-    "success": function (file, serverResponse) {
-        console.log("Success");
+//     "accept": function (file, done) {
+
+//         file.acceptDimensions = done;
+
+//         file.rejectDimensions = function () {
+//             done("The image must be at least 200 x 200");
+//         };
+//     }, 
+//     "success": function (file, serverResponse) {
+//         console.log("Success");
+//     }
+// };
+/////////////////////
+//////cloudinary/////
+/////////////////////
+
+var widget = cloudinary.createUploadWidget({
+    cloudName: "dm2obdaq7",
+    uploadPreset: "doggie",
+    cropping: "server"
+}, (error, result) => {
+    console.log(result)
+    
+    /// checks for successful upload then saves values to an array let photoUrls = []
+    if (result.event === "success"){
+        url.push(result.info.thumbnail_url)
+        url.push(result.info.url) 
+        console.log(url)
     }
-};
+    console.log(url)
+});
+widget.open("../images/1.jpg")
 
 $(document).ready(function () {
     // Dropdown menu
@@ -58,8 +83,8 @@ $(document).ready(function () {
 });
 
 function send() {
-
-    let files = document.forms[0].dropzone.files;
+                            ////changed from dropzone////
+    let files = document.forms[0].cloudinary.files;
 
     for (var i = 0; i < files.length; i++) {
         // console.log(document.getElementById(i.toString()).value)
@@ -87,10 +112,10 @@ function send() {
 function close() {
     document.getElementById("add_dialogue").innerHTML = "";
 }
-
+$(".CloseButton dn db-ns btn-close-popup pointer absolute").on("click", publish)
 function publish() {
-
-    let files = document.forms[0].dropzone.files
+                                ///changed from dropzone//
+    let files = document.forms[0].cloudinary.files
 
     let input = '<label>Title for $FILE_NAME</label><input type="text" id="$ID">';
     let button = '<button onclick="send()" type="submit" class="btn-large waves-effect waves-light" title="Click to Submit.">Submit</button>'
@@ -110,7 +135,8 @@ function publish() {
             url.push('http://test.com');
         }
         if (i == files.length - 1) {
-            document.forms[0].dropzone.files = good_files;
+            /////changed from dropzone////
+            document.forms[0].cloudinary.files = good_files;
             if (flag) {
                 html = html + "<br />" + button + "<br />" + close_button + "</dialog>";
                 document.getElementById("add_dialogue").innerHTML = html;
