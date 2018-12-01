@@ -82,6 +82,102 @@
 // });
 
 $(document).ready(function () {
+    let url = [];
+    let captions = [];
+    var widget = cloudinary.createUploadWidget({
+        cloudName: "dm2obdaq7",
+        uploadPreset: "doggie",
+        cropping: "server"
+    }, (error, result) => {
+        console.log(result)
+        
+        /// checks for successful upload then saves values to an array let photoUrls = []
+        if (result.event == "success"){
+            
+            url.push(result.info.url) 
+            publish(url)
+        }
+        
+    });
+    widget.open("../images/1.jpg")
+    cloudinary.applyUploadWidget('#upload_widget_opener', {
+        cloudName: 'dm2obdaq7',
+        uploadPreset: 'doggie',
+        tags: [""],
+        cropping: true,
+        folder: 'doggie'
+    }, (error, result) => {
+        
+    });
+    console.log(url)
+    function send() {
+                                ////changed from dropzone////
+        let files = url//document.forms[0].cloudinary.files;
+        console.log(files)
+        for (var i = 0; i < files.length; i++) {
+            // console.log(document.getElementById(i.toString()).value)
+            if (document.getElementById(i.toString()).value == "") {
+                return;
+            } else {
+                captions.push(document.getElementById(i.toString()).value);
+            }
+        }
+    
+        let payload = {
+            urls: files,
+            captions: captions,
+            title: document.getElementById("title").value
+        }
+        
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/create-story');
+        xhr.send(JSON.stringify(payload));
+        xhr.onreadystatechange = () => {
+            window.location = xhr.response;
+        };
+    }
+    
+    function close() {
+        document.getElementById("add_dialogue").innerHTML = "";
+    }
+    
+    function publish() {
+                                    ///changed from dropzone//
+       let files = url//document.forms[0].cloudinary.files
+    console.log(files)
+        let input = '<label>Title for $FILE_NAME</label><input type="text" id="$ID">';
+        let button = '<button onclick="send()" type="submit" class="btn-large waves-effect waves-light" title="Click to Submit.">Submit</button>'
+        let close_button = ''//'<button onclick="close()" class="btn-large waves-effect waves-light" title="Click to Cancel.">Cancel</button>';
+        let html = '<dialog id="submit_dialog"><lable>Story Title</label><input type="text" id="title"><br />'
+        let flag = false;
+        let good_files = [];
+    
+        for (var i = 0; i < files.length; i++) {
+            let element = files[i];
+            if (element.status == 'success') {
+                flag = true;
+                good_files.push(element);
+                let temp = input.replace("$FILE_NAME", element.name).replace("$ID", i);
+                html = html + temp;
+    
+                // url.push('http://test.com');
+            }
+            if (i == files.length - 1) {
+                /////changed from dropzone////
+                url = good_files;
+                if (flag) {
+                    html = html + "<br />" + button + "<br />" + close_button + "</dialog>";
+                    document.getElementById("add_dialogue").innerHTML = html;
+                    document.getElementById("submit_dialog").showModal();
+                }
+            }
+        };
+    }
+    
+    
+
+
+
     /////////////////////
 //////cloudinary/////
 /////////////////////
@@ -122,8 +218,6 @@ $(document).ready(function () {
 
 });
 
-let url = [];
-let captions = [];
 
 
 ///////////////////////////
@@ -174,94 +268,95 @@ let captions = [];
 /////////////////////
 //////cloudinary/////
 // /////////////////////
-
-var widget = cloudinary.createUploadWidget({
-    cloudName: "dm2obdaq7",
-    uploadPreset: "doggie",
-    cropping: "server"
-}, (error, result) => {
-    console.log(result)
+// let url = [];
+// let captions = [];
+// var widget = cloudinary.createUploadWidget({
+//     cloudName: "dm2obdaq7",
+//     uploadPreset: "doggie",
+//     cropping: "server"
+// }, (error, result) => {
+//     console.log(result)
     
-    /// checks for successful upload then saves values to an array let photoUrls = []
-    if (result.event == "success"){
+//     /// checks for successful upload then saves values to an array let photoUrls = []
+//     if (result.event == "success"){
         
-        url.push(result.info.url) 
-        
-    }
+//         url.push(result.info.url) 
+//         publish(url)
+//     }
     
-});
-widget.open("../images/1.jpg")
-cloudinary.applyUploadWidget('#upload_widget_opener', {
-    cloudName: 'dm2obdaq7',
-    uploadPreset: 'doggie',
-    tags: [""],
-    cropping: true,
-    folder: 'doggie'
-}, (error, result) => {
+// });
+// widget.open("../images/1.jpg")
+// cloudinary.applyUploadWidget('#upload_widget_opener', {
+//     cloudName: 'dm2obdaq7',
+//     uploadPreset: 'doggie',
+//     tags: [""],
+//     cropping: true,
+//     folder: 'doggie'
+// }, (error, result) => {
     
-});
-console.log(url)
-function send() {
-                            ////changed from dropzone////
-    let files = url//document.forms[0].cloudinary.files;
-    console.log(files)
-    for (var i = 0; i < files.length; i++) {
-        // console.log(document.getElementById(i.toString()).value)
-        if (document.getElementById(i.toString()).value == "") {
-            return;
-        } else {
-            captions.push(document.getElementById(i.toString()).value);
-        }
-    }
+// });
+// console.log(url)
+// function send() {
+//                             ////changed from dropzone////
+//     let files = url//document.forms[0].cloudinary.files;
+//     console.log(files)
+//     for (var i = 0; i < files.length; i++) {
+//         // console.log(document.getElementById(i.toString()).value)
+//         if (document.getElementById(i.toString()).value == "") {
+//             return;
+//         } else {
+//             captions.push(document.getElementById(i.toString()).value);
+//         }
+//     }
 
-    let payload = {
-        urls: files,
-        captions: captions,
-        title: document.getElementById("title").value
-    }
+//     let payload = {
+//         urls: files,
+//         captions: captions,
+//         title: document.getElementById("title").value
+//     }
     
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/create-story');
-    xhr.send(JSON.stringify(payload));
-    xhr.onreadystatechange = () => {
-        window.location = xhr.response;
-    };
-}
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('POST', '/api/create-story');
+//     xhr.send(JSON.stringify(payload));
+//     xhr.onreadystatechange = () => {
+//         window.location = xhr.response;
+//     };
+// }
 
-function close() {
-    document.getElementById("add_dialogue").innerHTML = "";
-}
+// function close() {
+//     document.getElementById("add_dialogue").innerHTML = "";
+// }
 
-function publish(url) {
-                                ///changed from dropzone//
-   let files = url//document.forms[0].cloudinary.files
-console.log(files)
-    let input = '<label>Title for $FILE_NAME</label><input type="text" id="$ID">';
-    let button = '<button onclick="send()" type="submit" class="btn-large waves-effect waves-light" title="Click to Submit.">Submit</button>'
-    let close_button = ''//'<button onclick="close()" class="btn-large waves-effect waves-light" title="Click to Cancel.">Cancel</button>';
-    let html = '<dialog id="submit_dialog"><lable>Story Title</label><input type="text" id="title"><br />'
-    let flag = false;
-    let good_files = [];
+// function publish() {
+//                                 ///changed from dropzone//
+//    let files = url//document.forms[0].cloudinary.files
+// console.log(files)
+//     let input = '<label>Title for $FILE_NAME</label><input type="text" id="$ID">';
+//     let button = '<button onclick="send()" type="submit" class="btn-large waves-effect waves-light" title="Click to Submit.">Submit</button>'
+//     let close_button = ''//'<button onclick="close()" class="btn-large waves-effect waves-light" title="Click to Cancel.">Cancel</button>';
+//     let html = '<dialog id="submit_dialog"><lable>Story Title</label><input type="text" id="title"><br />'
+//     let flag = false;
+//     let good_files = [];
 
-    for (var i = 0; i < files.length; i++) {
-        let element = files[i];
-        if (element.status == 'success') {
-            flag = true;
-            good_files.push(element);
-            let temp = input.replace("$FILE_NAME", element.name).replace("$ID", i);
-            html = html + temp;
+//     for (var i = 0; i < files.length; i++) {
+//         let element = files[i];
+//         if (element.status == 'success') {
+//             flag = true;
+//             good_files.push(element);
+//             let temp = input.replace("$FILE_NAME", element.name).replace("$ID", i);
+//             html = html + temp;
 
-            // url.push('http://test.com');
-        }
-        if (i == files.length - 1) {
-            /////changed from dropzone////
-            url = good_files;
-            if (flag) {
-                html = html + "<br />" + button + "<br />" + close_button + "</dialog>";
-                document.getElementById("add_dialogue").innerHTML = html;
-                document.getElementById("submit_dialog").showModal();
-            }
-        }
-    };
-}
+//             // url.push('http://test.com');
+//         }
+//         if (i == files.length - 1) {
+//             /////changed from dropzone////
+//             url = good_files;
+//             if (flag) {
+//                 html = html + "<br />" + button + "<br />" + close_button + "</dialog>";
+//                 document.getElementById("add_dialogue").innerHTML = html;
+//                 document.getElementById("submit_dialog").showModal();
+//             }
+//         }
+//     };
+// }
 
