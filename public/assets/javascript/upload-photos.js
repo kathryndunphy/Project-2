@@ -53,39 +53,6 @@ let captions = [];
 /////////////////////
 //////cloudinary/////
 // /////////////////////
-// let url = [];
-// let captions = [];
-// var widget = cloudinary.createUploadWidget({
-//     cloudName: "dm2obdaq7",
-//     uploadPreset: "doggie",
-//     cropping: "server"
-// }, (error, result) => {
-//     console.log(result)
-    
-//     /// checks for successful upload then saves values to an array let photoUrls = []
-//     if (result.event == "success"){
-        
-//         url.push(result.info.url) 
-        
-//     }
-    
-// });
-// widget.open("../images/1.jpg")
-// cloudinary.applyUploadWidget('#upload_widget_opener', {
-//     cloudName: 'dm2obdaq7',
-//     uploadPreset: 'doggie',
-//     tags: [""],
-//     cropping: true,
-//     folder: 'doggie'
-// }, (error, result) => {
-    
-// });
-
-
-$(document).ready(function () {
-    /////////////////////
-//////cloudinary/////
-/////////////////////
 let url = [];
 let captions = [];
 var widget = cloudinary.createUploadWidget({
@@ -113,6 +80,39 @@ cloudinary.applyUploadWidget('#upload_widget_opener', {
 }, (error, result) => {
     
 });
+
+
+$(document).ready(function (url,captions) {
+    /////////////////////
+//////cloudinary/////
+/////////////////////
+// let url = [];
+// let captions = [];
+// var widget = cloudinary.createUploadWidget({
+//     cloudName: "dm2obdaq7",
+//     uploadPreset: "doggie",
+//     cropping: "server"
+// }, (error, result) => {
+//     console.log(result)
+    
+//     /// checks for successful upload then saves values to an array let photoUrls = []
+//     if (result.event == "success"){
+        
+//         url.push(result.info.url) 
+        
+//     }
+    
+// });
+// widget.open("../images/1.jpg")
+// cloudinary.applyUploadWidget('#upload_widget_opener', {
+//     cloudName: 'dm2obdaq7',
+//     uploadPreset: 'doggie',
+//     tags: [""],
+//     cropping: true,
+//     folder: 'doggie'
+// }, (error, result) => {
+    
+// });
     // Dropdown menu
     $(".dropdown-button").dropdown();
 
