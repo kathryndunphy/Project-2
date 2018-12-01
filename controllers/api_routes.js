@@ -230,12 +230,96 @@ router.post("/upload-photos", upload.single("file"), (req, res, next) => {
             "error": "The image must be at least 200 x 200px."
         });
     };
-
     res.json(true);
 });
 
+router.post("/create-story", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+    req.body = JSON.parse(req.body);
+
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
+    } else {
+        function callback(results) {
+            res.send(`/story_${results[0].dataValues.story_id}`);
+        }
+        
+        Story.create({
+            "title"    : req.body.title,
+            "animal_id": aniId
+
+        }).then(result => {
+            const photos = [];
+            for (let i = 0; i < req.body.urls.length; i++) {
+                photos.push({
+                    "url"     : req.body.urls[i],
+                    "caption" : req.body.captions[i],
+                    "story_id": result.dataValues.id
+                });
+            }
+            Photo.bulkCreate(photos).then(callback);
+        });
+    }
+});
 
 
+router.patch("/edit-story_:aniId&:storyId", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
+
+    // Only the user can edit their stories
+    } else if (req.params.aniId !== aniId) {
+        res.redirect("/");
+
+    } else {
+        function callback(results) {
+            res.redirect(`/story_${req.params.storyId}`);
+        }
+        // Update the title
+        Story.update({
+            "title": req.body.title
+
+        }, {
+            "where": {"id": req.params.storyId}
+        // Update the captions
+        }).then(result => {
+            function updateCaption(caption, i) {
+                return Photo.update({caption}, {
+                    "where": {"id": req.body.ids[i]}
+
+                });
+            }
+            const updatesInParallel = req.body.captions.map(updateCaption);
+            return Promise.all([updatesInParallel]);
+        }).then(callback);
+    }
+});
+
+
+router.delete("/delete-story_:aniId&:storyId", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
+
+    // Only the user can delete their stories
+    } else if (req.params.aniId !== aniId) {
+        res.redirect("/");
+
+    } else {
+        function callback(results) {
+            res.redirect("/");
+        }
+        Story.destroy({
+            "where": {"id": req.params.storyId}
+        }).then(callback);
+    }
+});
 
 
 module.exports = router;

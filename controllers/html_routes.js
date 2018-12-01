@@ -93,7 +93,7 @@ router.get("/", (req, res) => {
                 "numNewStories": Math.floor(5 * Math.random()) + 1,
                 "numStories"   : 6,
                 "numAnimals"   : Math.floor(90 * Math.random()) + 10,
-                "numDogs"   : Math.floor(90 * Math.random()) + 10,
+                "numDogs"      : Math.floor(90 * Math.random()) + 10,
                 stories
             };
 
@@ -211,10 +211,6 @@ router.get("/profile_:id", (req, res) => {
     }
 });
 
-
-//////////////////////////////////////////////////////
-
-
 router.get("/upload-photos", (req, res) => {
     const aniId       = req.cookies["aniId"];
     const aniFullname = req.cookies["aniFullname"];
@@ -235,19 +231,130 @@ router.get("/upload-photos", (req, res) => {
 });
 
 router.get("/create-story", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+    
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
 
+    } else {
+        // TODO: Replace this array of photo URLs with the URLs from Amazon S3
+        const photos = [
+            {"url": "https://bit.ly/2FONWzE"}
+        ];
+
+        res.render("compose", {
+            aniId,
+            aniFullname,
+            "customCSS"       : ["style"],
+            "customJavascript": ["compose"],
+            photos
+        });
+
+    }
 });
 
-router.get("/story_:id", (req, res) => {
 
+router.get("/story_:id", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+    
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
+
+    } else {
+        function callback(results) {
+            const animal = {
+                "id"      : results[0].Animal.dataValues.id,
+                "fullname": results[0].Animal.dataValues.fullname
+            };
+
+            const photos = [];
+
+            for (let i = 0; i < results[0].Photos.length; i++) {
+                photos.push({
+                    "url"    : results[0].Photos[i].url,
+                    "caption": results[0].Photos[i].caption
+                });
+            }
+
+            res.render("story", {
+                aniId,
+                aniFullname,
+                "customCSS"       : ["style"],
+                "customJavascript": ["story"],
+                "title"           : results[0].dataValues.title,
+                animal,
+                photos
+            });
+        }
+
+        Story.findAll({
+            "where"  : {"id": req.params.id},
+            "include": [
+                {
+                    "model"     : Animal,
+                    "attributes": ["id", "fullname"]
+                },
+                {
+                    "model"     : Photo,
+                    "attributes": ["url", "caption"]
+                }
+            ],
+            "order"  : [
+                [Photo, "created_at", "ASC"]
+            ]
+
+        }).then(callback);
+
+    }
 });
 
 router.get("/edit-story_:aniId&:storyId", (req, res) => {
+    const aniId       = req.cookies["aniId"];
+    const aniFullname = req.cookies["aniFullname"];
+    
+    if (!isValidCookie(aniId)) {
+        res.render("index", defaultValues);
 
+    // Only the user can edit their stories
+    } else if (req.params.aniId !== aniId) {
+        res.redirect("/");
+
+    } else {
+        function callback(results) {
+            const photos = [];
+
+            for (let i = 0; i < results[0].Photos.length; i++) {
+                photos.push({
+                    "id"     : results[0].Photos[i].id,
+                    "url"    : results[0].Photos[i].url,
+                    "caption": results[0].Photos[i].caption
+                });
+            }
+            const story = {
+                "id"   : results[0].dataValues.id,
+                "title": results[0].dataValues.title,
+                photos
+            };
+            res.render("edit", {
+                aniId,
+                aniFullname,
+                "customCSS"       : ["style"],
+                "customJavascript": ["edit"],
+                story
+            });
+        }
+        Story.findAll({
+            "where"  : {"id": req.params.storyId},
+            "include": [Photo],
+            "order"  : [
+                [Photo, "created_at", "ASC"]
+            ]
+
+        }).then(callback);
+    }
 });
-
-
-//////////////////////////////////////////////////////
 
 router.get("/animals", (req, res) => {
     const aniId       = req.cookies["aniId"];
