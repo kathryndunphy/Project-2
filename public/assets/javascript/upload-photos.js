@@ -70,6 +70,15 @@ var widget = cloudinary.createUploadWidget({
     console.log(url)
 });
 widget.open("../images/1.jpg")
+cloudinary.applyUploadWidget('#upload_widget_opener', {
+    cloudName: 'dm2obdaq7',
+    uploadPreset: 'doggie',
+    tags: [""],
+    cropping: true,
+    folder: 'doggie'
+}, (error, result) => {
+    
+});
 
 $(document).ready(function () {
     // Dropdown menu
