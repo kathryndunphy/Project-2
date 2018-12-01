@@ -64,9 +64,9 @@ module.exports = function(sequelize, DataTypes) {
     }, {"underscored": true});
 
     // Create associations
-    Photo.associate = function(models) {
-        Photo.belongsTo(models.Story, {"onDelete": "CASCADE"});
-    }
+    // Photo.associate = function(models) {
+    //     Photo.belongsTo(models.Story, {"onDelete": "CASCADE"});
+    // }
 
-    return Photo;
+    // return Photo;
 }
