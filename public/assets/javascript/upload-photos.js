@@ -125,7 +125,7 @@ function close() {
 
 function publish() {
                                 ///changed from dropzone//
-    // let files = document.forms[0].cloudinary.files
+   let files = url//document.forms[0].cloudinary.files
 
     let input = '<label>Title for $FILE_NAME</label><input type="text" id="$ID">';
     let button = '<button onclick="send()" type="submit" class="btn-large waves-effect waves-light" title="Click to Submit.">Submit</button>'
@@ -146,7 +146,7 @@ function publish() {
         }
         if (i == files.length - 1) {
             /////changed from dropzone////
-            files = good_files;
+            url = good_files;
             if (flag) {
                 html = html + "<br />" + button + "<br />" + close_button + "</dialog>";
                 document.getElementById("add_dialogue").innerHTML = html;
