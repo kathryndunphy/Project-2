@@ -25,7 +25,7 @@ Sign up for an account and upload photos of the best dog in the world- yours!
 5. [Dropzone](https://www.dropzonejs.com/)
 6. [Node](https://nodejs.org/en/)
 7. [JawsDB](https://elements.heroku.com/addons/jawsdb) 
-8. NPM Packages
+8. **NPM Packages**
    * [Bcrypt](https://www.npmjs.com/package/bcrypt)
    * [Cookie-parser](https://www.npmjs.com/package/cookie-parser)
    * [Multer](https://www.npmjs.com/package/multer)
@@ -34,10 +34,8 @@ Sign up for an account and upload photos of the best dog in the world- yours!
    * [Method-Override](https://www.npmjs.com/package/method-override)
    * [Body-parser](https://www.npmjs.com/package/body-parser)
    * [Path](https://www.npmjs.com/package/path)
-   
-**Deploy on Heroku**
 
-### Contributions
+### Contributors
 
 * [Sohai9](www.linkedin.com)
 * [Christian](https://www.linkedin.com/in/christian-henry-27a7a7167/)
