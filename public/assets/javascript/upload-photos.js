@@ -53,8 +53,7 @@ let captions = [];
 /////////////////////
 //////cloudinary/////
 // /////////////////////
-let url = [];
-let captions = [];
+
 var widget = cloudinary.createUploadWidget({
     cloudName: "dm2obdaq7",
     uploadPreset: "doggie",
@@ -80,7 +79,6 @@ cloudinary.applyUploadWidget('#upload_widget_opener', {
 }, (error, result) => {
     
 });
-
 
 $(document).ready(function (url,captions) {
     /////////////////////
@@ -121,8 +119,8 @@ $(document).ready(function (url,captions) {
         "closeOnClick": true
     });
 
-// });
-
+});
+console.log(url)
 function send() {
                             ////changed from dropzone////
     let files = url//document.forms[0].cloudinary.files;
@@ -186,4 +184,4 @@ console.log(files)
         }
     };
 }
-});
+
