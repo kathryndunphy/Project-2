@@ -231,7 +231,7 @@ router.delete("/delete-account_:id", (req, res) => {
 /**********************************
     Set up routes (related to stories)
 ***********************************/
-router.get("api/story/: id", (req, res) => {
+router.get("/api/story: id", (req, res) => {
     Story.findAll({
         "where": {
             "id": req.params.id
@@ -271,7 +271,7 @@ router.post("/api/upload-photos: id", (req, res) => {
     }).then(res.json(result));
 }
 });
-router.delete("api/story: id", (req, res) => {
+router.delete("/api/story: id", (req, res) => {
     const aniId = req.cookies["aniId"]
     if (!isValidCookie(aniId)) {
         res.render("/index", defaultValues);
