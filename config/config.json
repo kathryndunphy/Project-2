@@ -1,0 +1,17 @@
+{
+    "development": {
+        "username": "root",
+        "password": null,
+        "database": "dwf",
+        "host"    : "127.0.0.1",
+        "dialect" : "mysql"
+    },
+      
+    "production": {
+        "username": "cizxpydp6frc7cuk",
+        "password": "yxpdeyeske74lizq",
+        "database": "sn3rb7d79hi17dcp",
+        "host"    : "umabrisfx8afs3ja.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+        "dialect" : "mysql"
+    }
+}
