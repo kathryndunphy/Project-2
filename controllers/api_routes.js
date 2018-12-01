@@ -236,7 +236,7 @@ router.get("api/story/: id", (req, res) => {
         "where": {
             "id": req.params.id
         },
-        include: [Photo]
+        // include: [Photo]
     }).then(res.json(story))
 })
 
@@ -252,12 +252,13 @@ router.get("api/story/: id", (req, res) => {
 //     }).then(res.redirect("/story"))
 
 // })
-router.post("/api/upload-photos: id", (req, res) => {
-    const aniId = req.cookies["aniId"]
+router.post("/api/upload-photos", (req, res) => {
+    // const aniId = req.cookies["aniId"]
     Story.create({
-        "title": req.body.title
+        "title": req.body.title,
+        "caption": req.body.caption
 
-    }).then(res.redirect("/story"))
+    }).then(function(result){res.json(result)})
 })
 router.delete("api/story: id", (req, res) => {
     const aniId = req.cookies["aniId"]

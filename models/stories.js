@@ -6,6 +6,16 @@ module.exports = function(sequelize, DataTypes) {
             "allowNull"   : false,
             "primaryKey"  : true
         },
+        "caption": {
+                        "type"     : DataTypes.TEXT,
+                        "allowNull": false,
+                        "validate" : {
+                            "notEmpty": {
+                                "args": true,
+                                "msg" : "Please enter a caption."
+                            }
+                        }
+                    },
         
         "title": {
             "type"     : DataTypes.STRING(100),
@@ -23,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
     // Create associations
     Story.associate = function(models) {
         Story.belongsTo(models.Animal, {"onDelete": "CASCADE"});
-        Story.hasMany(models.Photo);
+        // Story.hasMany(models.Photo);
     }
 
     return Story;
