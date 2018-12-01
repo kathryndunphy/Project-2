@@ -1,5 +1,5 @@
 // Change the default message
-Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop photos here to upload";
+// Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop photos here to upload";
 
 let url = [];
 let captions = [];
@@ -132,7 +132,7 @@ function publish() {
             let temp = input.replace("$FILE_NAME", element.name).replace("$ID", i);
             html = html + temp;
 
-            url.push('http://test.com');
+            // url.push('http://test.com');
         }
         if (i == files.length - 1) {
             /////changed from dropzone////
