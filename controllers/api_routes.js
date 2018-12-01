@@ -245,8 +245,8 @@ router.post("api/upload-photos", (req, res) => {
     // const aniId = req.cookies["aniId"] 
 
     Photo.create({
-        "url": photoUrls[2],
-        "thumbnail": photoUrls[1],
+        "url": photoUrls[1],
+        "thumbnail": photoUrls[0],
         "caption": req.body.caption,
         "title": req.body.title
     }).then(res.redirect("/story"))
@@ -262,7 +262,7 @@ router.post("/api/upload-photos", (req, res) => {
 router.delete("api/story: id", (req, res) => {
     const aniId = req.cookies["aniId"]
     if (!isValidCookie(aniId)) {
-        res.render("index", defaultValues);
+        res.render("/story", defaultValues);
 
         // Only the user can delete their stories
     } else if (req.params.id !== aniId) {
