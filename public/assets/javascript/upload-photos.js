@@ -148,7 +148,7 @@ function publish() {
         }
         if (i == url.length - 1) {
             /////changed from dropzone////
-            document.forms[0].cloudinary.files = good_files;
+            url = good_files;
             if (flag) {
                 html = html + "<br />" + button + "<br />" + close_button + "</dialog>";
                 document.getElementById("add_dialogue").innerHTML = html;
