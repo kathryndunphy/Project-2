@@ -22,8 +22,8 @@ module.exports = function(sequelize, DataTypes) {
 
     // Create associations
     Story.associate = function(models) {
-        // Story.belongsTo(models.Animal, {"onDelete": "CASCADE"});
-        // Story.hasMany(models.Photo);
+        Story.belongsTo(models.Animal, {"onDelete": "CASCADE"});
+        Story.hasMany(models.Photo);
     }
 
     return Story;
