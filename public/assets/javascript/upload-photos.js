@@ -65,7 +65,7 @@ var widget = cloudinary.createUploadWidget({
     if (result.event === "success"){
         url.push(result.info.thumbnail_url)
         url.push(result.info.url) 
-        console.log(url)
+        
     }
     console.log(url)
 });
@@ -79,6 +79,7 @@ cloudinary.applyUploadWidget('#upload_widget_opener', {
 }, (error, result) => {
     
 });
+
 
 $(document).ready(function () {
     // Dropdown menu
