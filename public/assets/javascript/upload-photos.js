@@ -63,7 +63,7 @@ var widget = cloudinary.createUploadWidget({
     
     /// checks for successful upload then saves values to an array let photoUrls = []
     if (result.event === "success"){
-        url.push(result.info.thumbnail_url)
+        
         url.push(result.info.url) 
         
     }
@@ -94,9 +94,9 @@ $(document).ready(function () {
 
 function send() {
                             ////changed from dropzone////
-    let files = document.forms[0].cloudinary.files;
+    // let files = document.forms[0].cloudinary.files;
 
-    for (var i = 0; i < files.length; i++) {
+    for (var i = 0; i < url.length; i++) {
         // console.log(document.getElementById(i.toString()).value)
         if (document.getElementById(i.toString()).value == "") {
             return;
@@ -127,7 +127,7 @@ $(".CloseButton dn db-ns btn-close-popup pointer absolute").on("click",  functio
 })
 function publish() {
                                 ///changed from dropzone//
-    let files = document.forms[0].cloudinary.files
+    // let files = document.forms[0].cloudinary.files
 
     let input = '<label>Title for $FILE_NAME</label><input type="text" id="$ID">';
     let button = '<button onclick="send()" type="submit" class="btn-large waves-effect waves-light" title="Click to Submit.">Submit</button>'
@@ -136,8 +136,8 @@ function publish() {
     let flag = false;
     let good_files = [];
 
-    for (var i = 0; i < files.length; i++) {
-        let element = files[i];
+    for (var i = 0; i < url.length; i++) {
+        let element = url[i];
         if (element.status == 'success') {
             flag = true;
             good_files.push(element);
@@ -146,7 +146,7 @@ function publish() {
 
             // url.push('http://test.com');
         }
-        if (i == files.length - 1) {
+        if (i == url.length - 1) {
             /////changed from dropzone////
             document.forms[0].cloudinary.files = good_files;
             if (flag) {
