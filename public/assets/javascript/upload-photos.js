@@ -1,5 +1,126 @@
-// Change the default message
-// Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop photos here to upload";
+// // Change the default message
+// // Dropzone.prototype.defaultOptions.dictDefaultMessage = "Drop photos here to upload";
+
+// let url = [];
+// let captions = [];
+
+
+// ///////////////////////////
+// ////////dropzone//////////
+// //////////////////////////
+
+// // Dropzone.options.uploadWidget = {
+// //     "paramName": "file",
+// //     "maxFilesize": 5, // MB
+// //     "maxFiles": 5,
+// //     "dictDefaultMessage": "Drop photos here to upload",
+// //     //     "headers": {
+// //     //         // TODO: Create a random CSRF (Cross-Site Request Forgery) token for extra security measure
+// //     // //      "x-csrf-token": document.querySelectorAll("meta[name=csrf-token]")[0].getAttributeNode("content").value
+// //     //         "x-csrf-token": "TODO_CREATE_A_RANDOM_TOKEN_HERE"
+// //     //     },
+// //     "acceptedFiles": "image/*",
+
+// //     "init": function () {
+// //         this.on("success", (file, res) => {
+// //             console.log(file);
+// //             console.log(res);
+// //         });
+
+// //         this.on("thumbnail", file => {
+// //             if (file.width < 200 || file.height < 200) {
+// //                 file.rejectDimensions();
+
+// //             } else {
+// //                 file.acceptDimensions();
+
+// //             }
+// //         });
+// //     },
+
+// //     "accept": function (file, done) {
+
+// //         file.acceptDimensions = done;
+
+// //         file.rejectDimensions = function () {
+// //             done("The image must be at least 200 x 200");
+// //         };
+// //     }, 
+// //     "success": function (file, serverResponse) {
+// //         console.log("Success");
+// //     }
+// // };
+// /////////////////////
+// //////cloudinary/////
+// // /////////////////////
+// let url = [];
+// let captions = [];
+// var widget = cloudinary.createUploadWidget({
+//     cloudName: "dm2obdaq7",
+//     uploadPreset: "doggie",
+//     cropping: "server"
+// }, (error, result) => {
+//     console.log(result)
+    
+//     /// checks for successful upload then saves values to an array let photoUrls = []
+//     if (result.event == "success"){
+        
+//         url.push(result.info.url) 
+        
+//     }
+    
+// });
+// widget.open("../images/1.jpg")
+// cloudinary.applyUploadWidget('#upload_widget_opener', {
+//     cloudName: 'dm2obdaq7',
+//     uploadPreset: 'doggie',
+//     tags: [""],
+//     cropping: true,
+//     folder: 'doggie'
+// }, (error, result) => {
+    
+// });
+
+$(document).ready(function () {
+    /////////////////////
+//////cloudinary/////
+/////////////////////
+// let url = [];
+// let captions = [];
+// var widget = cloudinary.createUploadWidget({
+//     cloudName: "dm2obdaq7",
+//     uploadPreset: "doggie",
+//     cropping: "server"
+// }, (error, result) => {
+//     console.log(result)
+    
+//     /// checks for successful upload then saves values to an array let photoUrls = []
+//     if (result.event == "success"){
+        
+//         url.push(result.info.url) 
+        
+//     }
+    
+// });
+// widget.open("../images/1.jpg")
+// cloudinary.applyUploadWidget('#upload_widget_opener', {
+//     cloudName: 'dm2obdaq7',
+//     uploadPreset: 'doggie',
+//     tags: [""],
+//     cropping: true,
+//     folder: 'doggie'
+// }, (error, result) => {
+    
+// });
+    // Dropdown menu
+    $(".dropdown-button").dropdown();
+
+    // Navbar for mobile
+    $(".button-collapse").sideNav({
+        "closeOnClick": true
+    });
+
+});
 
 let url = [];
 let captions = [];
@@ -78,47 +199,6 @@ cloudinary.applyUploadWidget('#upload_widget_opener', {
     folder: 'doggie'
 }, (error, result) => {
     
-});
-
-$(document).ready(function () {
-    /////////////////////
-//////cloudinary/////
-/////////////////////
-// let url = [];
-// let captions = [];
-// var widget = cloudinary.createUploadWidget({
-//     cloudName: "dm2obdaq7",
-//     uploadPreset: "doggie",
-//     cropping: "server"
-// }, (error, result) => {
-//     console.log(result)
-    
-//     /// checks for successful upload then saves values to an array let photoUrls = []
-//     if (result.event == "success"){
-        
-//         url.push(result.info.url) 
-        
-//     }
-    
-// });
-// widget.open("../images/1.jpg")
-// cloudinary.applyUploadWidget('#upload_widget_opener', {
-//     cloudName: 'dm2obdaq7',
-//     uploadPreset: 'doggie',
-//     tags: [""],
-//     cropping: true,
-//     folder: 'doggie'
-// }, (error, result) => {
-    
-// });
-    // Dropdown menu
-    $(".dropdown-button").dropdown();
-
-    // Navbar for mobile
-    $(".button-collapse").sideNav({
-        "closeOnClick": true
-    });
-
 });
 console.log(url)
 function send() {
