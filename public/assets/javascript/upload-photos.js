@@ -67,7 +67,7 @@ var widget = cloudinary.createUploadWidget({
         url.push(result.info.url) 
         
     }
-    console.log(url)
+    
 });
 widget.open("../images/1.jpg")
 cloudinary.applyUploadWidget('#upload_widget_opener', {
@@ -95,7 +95,7 @@ $(document).ready(function () {
 function send() {
                             ////changed from dropzone////
     let files = url//document.forms[0].cloudinary.files;
-
+    console.log(files)
     for (var i = 0; i < files.length; i++) {
         // console.log(document.getElementById(i.toString()).value)
         if (document.getElementById(i.toString()).value == "") {
