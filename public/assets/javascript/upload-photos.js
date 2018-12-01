@@ -121,7 +121,9 @@ function send() {
 function close() {
     document.getElementById("add_dialogue").innerHTML = "";
 }
-$(".CloseButton dn db-ns btn-close-popup pointer absolute").on("click", publish)
+$(".CloseButton dn db-ns btn-close-popup pointer absolute").on("click",  function caption(){
+    publish()
+})
 function publish() {
                                 ///changed from dropzone//
     let files = document.forms[0].cloudinary.files
